@@ -1,0 +1,50 @@
+/* Estilo totalmente novo para o card cinza */
+.guest-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #6c6c6c; /* Cor cinza do seu exemplo */
+  color: white; /* Texto branco */
+  border-radius: 12px; /* Cantos arredondados */
+  padding: 20px 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  min-height: 250px; /* Altura mínima para todos os cards */
+  box-sizing: border-box;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.guest-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.guest-image {
+  width: 100px; /* Imagem maior, como no exemplo */
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border: 3px solid #f0f0f0; /* Borda clara na foto */
+}
+
+/* Estilo para todos os textos dentro do card */
+.guest-card p {
+  margin: 4px 0; /* Espaçamento menor entre as linhas */
+}
+
+.guest-name {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.guest-status {
+  font-size: 1em;
+  font-weight: normal;
+}
+
+.guest-confirmation {
+  font-size: 1em;
+  font-weight: bold; /* "Confirmado" em negrito */
+}

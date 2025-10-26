@@ -1,0 +1,17 @@
+.guest-list-container {
+    /* O container já tem padding pela classe .guest-section */
+  }
+  
+  .empty-list-message {
+    text-align: center;
+    color: #666;
+    font-size: 1.1em;
+    margin-top: 50px;
+  }
+  
+  .guest-cards-grid {
+    display: grid;
+    /* Cria colunas de no mínimo 120px, preenchendo o espaço */
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); 
+    gap: 15px;
+  }
