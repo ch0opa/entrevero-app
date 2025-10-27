@@ -1,51 +1,51 @@
-import React, { useState, useRef } from 'react'; // 1. Importamos o 'useRef'
+import React, { useState, useRef } from 'react'; 
 
 function ContactForm({ onAddGuest }) {
-  // 2. Criamos uma 'ref' para o input de arquivo
+  
   const fileInputRef = useRef(null);
 
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    status: '', // 'egresso', 'convidado' ou 'estudante'
-    paid: '',   // 'sim' ou 'nao'
-    imageUrl: '' // Vai guardar o texto Base64 da imagem
+    status: '',
+    paid: '',   
+    imageUrl: ''
   });
   
   const [errors, setErrors] = useState({});
 
-  // Esta função continua igual, para os inputs de texto
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  // --- MUDANÇA 3: Nova função para lidar com o UPLOAD ---
-  // Esta função é chamada QUANDO o usuário seleciona um arquivo
+ 
+  
   const handleFileChange = (e) => {
-    const file = e.target.files[0]; // Pega o arquivo
+    const file = e.target.files[0]; 
     if (!file) {
       setFormData(prev => ({ ...prev, imageUrl: '' }));
       return;
     }
 
-    // Checa se é uma imagem
+   
     if (!file.type.startsWith('image/')) {
       alert('Por favor, selecione um arquivo de imagem.');
-      if(fileInputRef.current) fileInputRef.current.value = null; // Limpa o input
+      if(fileInputRef.current) fileInputRef.current.value = null;
       return;
     }
 
-    // Converte o arquivo de imagem para um texto Base64
+    
     const reader = new FileReader();
     reader.onloadend = () => {
-      // Quando a conversão termina, salva o texto no estado
+    
       setFormData(prev => ({ ...prev, imageUrl: reader.result }));
     };
     reader.readAsDataURL(file);
   };
 
-  // --- MUDANÇA 4: Validação atualizada ---
+ 
   const validateForm = () => {
     let newErrors = {};
     if (!formData.name.trim()) newErrors.name = "Nome é obrigatório.";
@@ -53,7 +53,7 @@ function ContactForm({ onAddGuest }) {
     if (!formData.status) newErrors.status = "Status é obrigatório.";
     if (!formData.paid) newErrors.paid = "Campo 'Pago' é obrigatório.";
     
-    // Agora só checa se o campo imageUrl está preenchido (com o texto Base64)
+    
     if (!formData.imageUrl) {
       newErrors.imageUrl = "A foto é obrigatória.";
     }
@@ -62,13 +62,13 @@ function ContactForm({ onAddGuest }) {
     return Object.keys(newErrors).length === 0;
   };
 
-  // --- MUDANÇA 5: Limpar o input de arquivo ---
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
       onAddGuest(formData); 
 
-      // Limpa o formulário
+      
       setFormData({
         name: '',
         phone: '',
@@ -78,7 +78,7 @@ function ContactForm({ onAddGuest }) {
       });
       setErrors({});
 
-      // Limpa o campo de "Escolher arquivo" visualmente
+      
       if(fileInputRef.current) {
         fileInputRef.current.value = null;
       }
@@ -93,8 +93,6 @@ function ContactForm({ onAddGuest }) {
     <div className="contact-form-container">
       <h3>Cadastro de Convidado</h3>
       <form onSubmit={handleSubmit}>
-        
-        {/* ... Os campos Nome, Telefone, Status e Pago continuam iguais ... */}
         
         <div className="form-group">
           <label htmlFor="name">Nome:</label>
@@ -137,16 +135,16 @@ function ContactForm({ onAddGuest }) {
           {errors.paid && <span className="error-message">{errors.paid}</span>}
         </div>
         
-        {/* --- MUDANÇA 6: O HTML do Input --- */}
+
         <div className="form-group">
           <label htmlFor="imageUrl">Foto:</label>
           <input
-            type="file" // 1. Mudou de 'text' para 'file'
+            type="file" 
             id="imageUrl"
             name="imageUrl"
-            accept="image/*" // 2. Filtra para aceitar só imagens
-            onChange={handleFileChange} // 3. Usa a nova função
-            ref={fileInputRef} // 4. Conecta a 'ref'
+            accept="image/*" 
+            onChange={handleFileChange} 
+            ref={fileInputRef} 
             className={errors.imageUrl ? 'invalid-input' : ''}
           />
           {errors.imageUrl && <span className="error-message">{errors.imageUrl}</span>}

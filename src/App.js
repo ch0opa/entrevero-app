@@ -5,48 +5,46 @@ import GuestList from './components/GuestList';
 import ContactForm from './components/ContactForm';
 import axios from 'axios';
 
-// Chave para salvar no localStorage (Isso continua igual)
+
 const GUESTS_STORAGE_KEY = 'entrevero-app-guests';
 
 function App() {
 
-  // --- MUDANÇA AQUI ---
-  // O estado de 'locationData' agora começa preenchido
-  // com os dados da Ulbra Torres que você passou.
+  
   const [locationData, setLocationData] = useState({
     cep: '95560000',
     cidade: 'Torres',
     bairro: 'Parque do Balonismo',
     avRua: 'R. Universitária, 1900',
   });
-  // --- FIM DA MUDANÇA ---
+  
 
 
-  // A lógica do localStorage para os 'guests' continua igual
+  
   const [guests, setGuests] = useState(() => {
     const savedGuests = localStorage.getItem(GUESTS_STORAGE_KEY);
     if (savedGuests) {
-      return JSON.parse(savedGuests); // Se achou, carrega a lista
+      return JSON.parse(savedGuests);
     } else {
-      return []; // Se não achou, começa com a lista vazia
+      return [];
     }
   }); 
   
   const [pageTitle, setPageTitle] = useState("Seja bem vindo, (props.name)");
 
-  // Este 'useEffect' para salvar os 'guests' continua igual
+  
   useEffect(() => {
     localStorage.setItem(GUESTS_STORAGE_KEY, JSON.stringify(guests));
   }, [guests]); 
 
-  // Este 'useEffect' para o título continua igual
+  
   useEffect(() => {
     const userName = "Usuário";
     setPageTitle(`Seja bem vindo, ${userName}`);
   }, []);
 
-  // Esta função continua igual. O usuário AINDA PODE
-  // digitar um novo CEP se quiser mudar o endereço.
+  
+  
   const fetchLocationData = async (cep) => {
     if (cep.length === 8) {
       try {
@@ -70,7 +68,7 @@ function App() {
     }
   };
 
-  // Esta função continua igual
+  
   const handleAddGuest = (newGuestData) => {
     setGuests(prevGuests => {
       const newGuest = {
@@ -82,7 +80,7 @@ function App() {
     });
   };
 
-  // O HTML (JSX) continua igual
+  
   return (
     <div className="App">
       <header className="App-header">

@@ -1,7 +1,7 @@
 import React from 'react';
 
 function LocationForm({ locationData, onCepChange, onLocationDataChange }) {
-  // Frame 7: Validação do CEP (simplificada)
+  
   const isCepValid = locationData.cep.length === 0 || locationData.cep.length === 8;
 
   return (
@@ -27,7 +27,7 @@ function LocationForm({ locationData, onCepChange, onLocationDataChange }) {
           id="cidade"
           value={locationData.cidade}
           onChange={(e) => onLocationDataChange('cidade', e.target.value)}
-          // A propriedade readOnly foi REMOVIDA daqui
+          
         />
       </div>
       <div className="form-group">
@@ -37,7 +37,7 @@ function LocationForm({ locationData, onCepChange, onLocationDataChange }) {
           id="bairro"
           value={locationData.bairro}
           onChange={(e) => onLocationDataChange('bairro', e.target.value)}
-          // A propriedade readOnly foi REMOVIDA daqui
+          
         />
       </div>
       <div className="form-group">
@@ -47,7 +47,7 @@ function LocationForm({ locationData, onCepChange, onLocationDataChange }) {
           id="avRua"
           value={locationData.avRua}
           onChange={(e) => onLocationDataChange('avRua', e.target.value)}
-          // A propriedade readOnly foi REMOVIDA daqui
+          
         />
       </div>
     </div>
